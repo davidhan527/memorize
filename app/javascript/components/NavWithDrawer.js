@@ -10,7 +10,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
-import Icon from "@material-ui/core/Icon";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -21,10 +20,17 @@ const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+  },
+  actions: {
+    width: 500,
+    height: 200,
+  },
+  actionText: {
+    textAlign: 'center',
   },
   appFrame: {
-    height: 430,
+    height: '100%',
     zIndex: 1,
     overflow: "hidden",
     position: "relative",
@@ -74,6 +80,9 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
     transition: theme.transitions.create("margin", {
@@ -181,13 +190,17 @@ class NavWithDrawer extends React.Component {
             })}
           >
             <div className={classes.drawerHeader} />
-            <Typography>
-              {"You think water moves fast? You should see ice."}
-            </Typography>
-            <div>
-              <Icon className={classes.addIcon} color="primary">
-                add_circle
-              </Icon>
+            <div className={classes.actions}>
+              <div className={classes.actionText}>
+                <Typography variant="display2" gutterBottom>
+                  Add Verse
+                </Typography>
+              </div>
+              <div className={classes.actionText}>
+                <Typography variant="display2" gutterBottom>
+                  Review
+                </Typography>
+              </div>
             </div>
           </main>
         </div>
