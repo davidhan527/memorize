@@ -5,7 +5,7 @@ module Bible
     end
 
     def call
-      parsed_response['passages'].first.squish
+      parsed_response['passages'].first.to_s.squish
     end
 
     private
