@@ -1,5 +1,7 @@
 module Bible
   class Client
+    BASE_URI = 'https://api.esv.org/v3/passage/text/'
+
     def initialize(passage)
       @passage = passage
     end
@@ -28,7 +30,7 @@ module Bible
     end
 
     def connection
-      @connection ||= Faraday.new(url: 'https://api.esv.org/v3/passage/text/') do |conn|
+      @connection ||= Faraday.new(url: BASE_URI) do |conn|
         conn.headers['Authorization'] = "Token #{Rails.application.secrets.esv_api}"
         conn.adapter(Faraday.default_adapter)
       end
