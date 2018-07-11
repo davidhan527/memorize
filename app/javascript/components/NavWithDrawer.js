@@ -15,6 +15,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { mailFolderListItems, otherMailFolderListItems } from "./tileData";
+import VerseDialog from "./VerseDialog"
 
 const drawerWidth = 240;
 
@@ -192,9 +193,7 @@ class NavWithDrawer extends React.Component {
             <div className={classes.drawerHeader} />
             <div className={classes.actions}>
               <div className={classes.actionText}>
-                <Typography variant="display2" gutterBottom>
-                  Add Verse
-                </Typography>
+                <VerseDialog/>
               </div>
               <div className={classes.actionText}>
                 <Typography variant="display2" gutterBottom>
