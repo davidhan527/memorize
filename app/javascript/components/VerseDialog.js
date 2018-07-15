@@ -8,6 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
+import axios from "axios";
 
 export default class VerseDialog extends React.Component {
   state = {
@@ -20,6 +21,10 @@ export default class VerseDialog extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
+  };
+
+  searchVerse = () => {
+    axios.get(this.props.paths.verses, { params: { verse: {} } });
   };
 
   render() {
@@ -55,7 +60,7 @@ export default class VerseDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.searchVerse} color="primary">
               Search Verse
             </Button>
           </DialogActions>

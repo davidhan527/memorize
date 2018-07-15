@@ -193,7 +193,7 @@ class NavWithDrawer extends React.Component {
             <div className={classes.drawerHeader} />
             <div className={classes.actions}>
               <div className={classes.actionText}>
-                <VerseDialog/>
+                <VerseDialog paths={this.props.paths}/>
               </div>
               <div className={classes.actionText}>
                 <Typography variant="display2" gutterBottom>
