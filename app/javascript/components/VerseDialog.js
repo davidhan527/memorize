@@ -12,7 +12,9 @@ import axios from "axios";
 
 export default class VerseDialog extends React.Component {
   state = {
-    open: false
+    open: false,
+    passage: null,
+    text: null
   };
 
   handleClickOpen = () => {
@@ -23,11 +25,21 @@ export default class VerseDialog extends React.Component {
     this.setState({ open: false });
   };
 
+  setVerse = e => {
+    this.setState({ passage: e.target.value });
+  };
+
   searchVerse = () => {
-    axios.get(this.props.paths.verses, { params: { verse: {} } });
+    axios
+      .get(this.props.paths.verses, { params: { passage: this.state.passage } })
+      .then(response => {
+        this.setState({ text: response.data.text });
+      });
   };
 
   render() {
+    const { text } = this.state;
+
     return (
       <div>
         <StyledTypography
@@ -42,20 +54,27 @@ export default class VerseDialog extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
+          maxWidth="md"
         >
           <DialogTitle id="form-dialog-title">Add Verse</DialogTitle>
-          <DialogContent>
+          <StyledDialogContent>
             <DialogContentText />
             <TextField
               autoFocus
               margin="dense"
+              onChange={this.setVerse}
               placeholder="Psalm 119:9-16"
               id="name"
               label="Verse"
               type="email"
               fullWidth
             />
-          </DialogContent>
+            {text && (
+              <Typography variant="body1" gutterBottom>
+                {text}
+              </Typography>
+            )}
+          </StyledDialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               Cancel
@@ -72,4 +91,9 @@ export default class VerseDialog extends React.Component {
 
 const StyledTypography = styled(Typography)`
   cursor: pointer;
+`;
+
+const StyledDialogContent = styled(DialogContent)`
+  width: 500px;
+  height: 300px;
 `;
