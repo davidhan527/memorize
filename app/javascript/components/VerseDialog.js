@@ -29,7 +29,9 @@ export default class VerseDialog extends React.Component {
     this.setState({ passage: e.target.value });
   };
 
-  searchVerse = () => {
+  searchVerse = e => {
+    e.preventDefault();
+
     axios
       .get(this.props.paths.verses, { params: { passage: this.state.passage } })
       .then(response => {
@@ -57,32 +59,34 @@ export default class VerseDialog extends React.Component {
           maxWidth="md"
         >
           <DialogTitle id="form-dialog-title">Add Verse</DialogTitle>
-          <StyledDialogContent>
-            <DialogContentText />
-            <TextField
-              autoFocus
-              margin="dense"
-              onChange={this.setVerse}
-              placeholder="Psalm 119:9-16"
-              id="name"
-              label="Verse"
-              type="email"
-              fullWidth
-            />
-            {text && (
-              <Typography variant="body1" gutterBottom>
-                {text}
-              </Typography>
-            )}
-          </StyledDialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.searchVerse} color="primary">
-              Search Verse
-            </Button>
-          </DialogActions>
+          <form onSubmit={this.searchVerse}>
+            <StyledDialogContent>
+              <DialogContentText />
+              <TextField
+                autoFocus
+                margin="dense"
+                onChange={this.setVerse}
+                placeholder="Psalm 119:9-16"
+                id="name"
+                label="Verse"
+                type="text"
+                fullWidth
+              />
+              {text && (
+                <Typography variant="body1" gutterBottom>
+                  {text}
+                </Typography>
+              )}
+            </StyledDialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button type="submit" color="primary">
+                Search Verse
+              </Button>
+            </DialogActions>
+          </form>
         </Dialog>
       </div>
     );
