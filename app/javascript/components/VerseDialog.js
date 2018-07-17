@@ -39,8 +39,24 @@ export default class VerseDialog extends React.Component {
       });
   };
 
+  actionButton = () => {
+    if (this.state.text) {
+      return (
+        <Button color="primary" variant="contained">
+          Add Verse
+        </Button>
+      );
+    } else {
+      return (
+        <Button type="submit" color="primary">
+          Search Verse
+        </Button>
+      );
+    }
+  };
+
   render() {
-    const { text } = this.state;
+    const { text, passage } = this.state;
 
     return (
       <div>
@@ -82,9 +98,8 @@ export default class VerseDialog extends React.Component {
               <Button onClick={this.handleClose} color="primary">
                 Cancel
               </Button>
-              <Button type="submit" color="primary">
-                Search Verse
-              </Button>
+
+              {this.actionButton()}
             </DialogActions>
           </form>
         </Dialog>
