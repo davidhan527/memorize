@@ -39,10 +39,15 @@ export default class VerseDialog extends React.Component {
       });
   };
 
+  addVerse = () => {
+    const { passage, text} = this.state
+    axios.post(this.props.paths.cards, { passage: passage, text: text} )
+  }
+
   actionButton = () => {
     if (this.state.text) {
       return (
-        <Button color="primary" variant="contained">
+        <Button color="primary" variant="contained" onClick={this.addVerse}>
           Add Verse
         </Button>
       );
