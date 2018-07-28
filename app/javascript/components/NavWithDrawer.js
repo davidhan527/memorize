@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -15,23 +16,23 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { mailFolderListItems, otherMailFolderListItems } from "./tileData";
-import VerseDialog from "./VerseDialog"
+import VerseDialog from "./VerseDialog";
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   actions: {
     width: 500,
-    height: 200,
+    height: 200
   },
   actionText: {
-    textAlign: 'center',
+    textAlign: "center"
   },
   appFrame: {
-    height: '100%',
+    height: "100%",
     zIndex: 1,
     overflow: "hidden",
     position: "relative",
@@ -81,9 +82,9 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
     transition: theme.transitions.create("margin", {
@@ -114,7 +115,8 @@ const styles = theme => ({
 class NavWithDrawer extends React.Component {
   state = {
     open: false,
-    anchor: "left"
+    anchor: "left",
+    reviewingVerses: false
   };
 
   handleDrawerOpen = () => {
@@ -130,6 +132,33 @@ class NavWithDrawer extends React.Component {
       anchor: event.target.value
     });
   };
+
+  renderMain() {
+    const { classes, theme, paths } = this.props;
+
+    if (this.state.reviewingVerses) {
+      return <div />;
+    } else {
+      return (
+        <div className={classes.actions}>
+          <div className={classes.actionText}>
+            <VerseDialog paths={paths} />
+          </div>
+          <div className={classes.actionText}>
+            <StyledTypography
+              variant="display2"
+              onClick={() => {
+                this.setState({ reviewingVerses: true });
+              }}
+              gutterBottom
+            >
+              Review
+            </StyledTypography>
+          </div>
+        </div>
+      );
+    }
+  }
 
   render() {
     const { classes, theme } = this.props;
@@ -191,16 +220,8 @@ class NavWithDrawer extends React.Component {
             })}
           >
             <div className={classes.drawerHeader} />
-            <div className={classes.actions}>
-              <div className={classes.actionText}>
-                <VerseDialog paths={this.props.paths}/>
-              </div>
-              <div className={classes.actionText}>
-                <Typography variant="display2" gutterBottom>
-                  Review
-                </Typography>
-              </div>
-            </div>
+
+            {this.renderMain()}
           </main>
         </div>
       </div>
@@ -214,3 +235,7 @@ NavWithDrawer.propTypes = {
 };
 
 export default withStyles(styles, { withTheme: true })(NavWithDrawer);
+
+const StyledTypography = styled(Typography)`
+  cursor: pointer;
+`;
