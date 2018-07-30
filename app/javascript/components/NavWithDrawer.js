@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -17,6 +18,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { mailFolderListItems, otherMailFolderListItems } from "./tileData";
 import VerseDialog from "./VerseDialog";
+import ReviewVerses from "./ReviewVerses";
 
 const drawerWidth = 240;
 
@@ -25,7 +27,7 @@ const styles = theme => ({
     flexGrow: 1
   },
   actions: {
-    width: 500,
+    width: 350,
     height: 200
   },
   actionText: {
@@ -137,7 +139,7 @@ class NavWithDrawer extends React.Component {
     const { classes, theme, paths } = this.props;
 
     if (this.state.reviewingVerses) {
-      return <div />;
+      return <ReviewVerses paths={this.props.paths}/>
     } else {
       return (
         <div className={classes.actions}>
