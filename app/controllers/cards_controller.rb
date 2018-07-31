@@ -15,6 +15,11 @@ class CardsController < ApplicationController
   def update
   end
 
+  def reviewed
+    puts params
+    render json: {}, status: :ok
+  end
+
   def destroy
   end
 

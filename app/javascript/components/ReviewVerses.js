@@ -18,6 +18,14 @@ export default class ReviewVerses extends React.Component {
     });
   }
 
+  reviewedCard(difficulty) {
+    axios
+      .put(this.state.currentCard.attributes.reviewed_card_path, {
+        params: { difficulty: difficulty }
+      })
+      .then(response => {});
+  }
+
   renderCard() {
     const { currentCard } = this.state;
 
@@ -27,10 +35,19 @@ export default class ReviewVerses extends React.Component {
           <h4>{currentCard.attributes.passage}</h4>
           <p>{currentCard.attributes.text}</p>
 
-          <Button variant="outlined" component="span">
+          <Button
+            variant="outlined"
+            component="span"
+            onClick={() => this.reviewedCard("easy")}
+          >
             Easy
           </Button>
-          <Button variant="outlined" component="span">
+
+          <Button
+            variant="outlined"
+            component="span"
+            onClick={() => this.reviewedCard("hard")}
+          >
             Hard
           </Button>
         </div>
