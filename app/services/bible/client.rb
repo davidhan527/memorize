@@ -12,7 +12,7 @@ module Bible
         with_default_settings(req)
       end
 
-      Parser.new(response).call
+      Bible::Parser.new(response).call
     end
 
     private
