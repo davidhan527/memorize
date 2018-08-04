@@ -20,6 +20,16 @@ module Cards
     end
 
     def reviewed(difficulty)
+      @card.last_viewed_at = Time.current
+
+      if difficulty == 'easy'
+        @card.ranking += 1
+      elsif difficulty == 'hard'
+        @card.ranking -= 1 unless @card.ranking == 0
+      end
+
+      @card.review_at = RANKING[@card.ranking]
+      @card.save!
     end
   end
 end

@@ -21,7 +21,7 @@ export default class ReviewVerses extends React.Component {
   reviewedCard(difficulty) {
     axios
       .put(this.state.currentCard.attributes.reviewed_card_path, {
-        params: { difficulty: difficulty }
+        difficulty: difficulty
       })
       .then(response => {});
   }
