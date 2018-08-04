@@ -17,6 +17,7 @@ class CardsController < ApplicationController
 
   def reviewed
     puts params
+    Cards::Service.new(Card.find(params[:id])).reviewed(params[:difficulty])
     render json: {}, status: :ok
   end
 
