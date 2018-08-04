@@ -13,7 +13,7 @@ module Cards
       9 => 6.months.from_now,
       10 => 9.months.from_now,
       11 => 1.year.from_now,
-    }
+    }.freeze
 
     def initialize(card)
       @card = card
@@ -30,6 +30,7 @@ module Cards
 
       @card.review_at = RANKING[@card.ranking]
       @card.save!
+      @card
     end
   end
 end

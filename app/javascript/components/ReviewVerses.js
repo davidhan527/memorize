@@ -23,7 +23,15 @@ export default class ReviewVerses extends React.Component {
       .put(this.state.currentCard.attributes.reviewed_card_path, {
         difficulty: difficulty
       })
-      .then(response => {});
+      .then(response => {
+        let cardsCopy = [...this.state.cards];
+        let currentCard = cardsCopy.pop();
+
+        this.setState({
+          cards: cardsCopy,
+          currentCard: currentCard
+        });
+      });
   }
 
   renderCard() {
