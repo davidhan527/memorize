@@ -1,7 +1,7 @@
 module Cards
   class Service
     RANKING = {
-      0 => 5.minutes.from_now,
+      0 => Time.current,
       1 => 15.minutes.from_now,
       2 => 1.hour.from_now,
       3 => 1.day.from_now,

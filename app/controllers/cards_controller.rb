@@ -2,7 +2,10 @@ class CardsController < ApplicationController
   protect_from_forgery with: :null_session
 
   def index
-    cards = Card.order(:review_at).all
+    cards = Card.
+      order(review_at: :desc).
+      where('review_at <= ?', Time.current).
+      all
     render json: { cards: CardSerializer.new(cards).serializable_hash }, status: :ok
   end
 
