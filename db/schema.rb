@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_04_203255) do
+ActiveRecord::Schema.define(version: 2018_08_05_041343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2018_08_04_203255) do
     t.string "passage", null: false
     t.text "text", null: false
     t.datetime "last_viewed_at"
-    t.datetime "review_at"
+    t.datetime "review_at", default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "ranking", default: 0, null: false
