@@ -129,7 +129,7 @@ export default class VerseDialog extends React.Component {
           ContentProps={{
             "aria-describedby": "verse_added"
           }}
-          message={<span id="verse_added">I love snacks</span>}
+          message={<span id="verse_added">Verse added</span>}
         />
       </div>
     );

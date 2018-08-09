@@ -4,7 +4,7 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 
 export default class ReviewVerses extends React.Component {
-  state = { cards: null, currentCard: null };
+  state = { cards: [], currentCard: null };
 
   componentDidMount() {
     axios.get(this.props.paths.cards).then(response => {
@@ -35,7 +35,7 @@ export default class ReviewVerses extends React.Component {
   }
 
   renderCard() {
-    const { currentCard } = this.state;
+    const { currentCard, cards } = this.state;
 
     if (currentCard) {
       return (
@@ -60,6 +60,10 @@ export default class ReviewVerses extends React.Component {
           </Button>
         </div>
       );
+    }
+
+    if (currentCard !== null && cards.length === 0) {
+      return <div>You have no more verses to review.</div>;
     }
   }
 
