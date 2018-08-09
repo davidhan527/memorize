@@ -8,13 +8,15 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
+import Snackbar from "@material-ui/core/Snackbar";
 import axios from "axios";
 
 export default class VerseDialog extends React.Component {
   state = {
     open: false,
-    passage: null,
-    text: null
+    passage: "",
+    text: "",
+    notificationOpen: false
   };
 
   handleClickOpen = () => {
@@ -23,6 +25,10 @@ export default class VerseDialog extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
+  };
+
+  handleNotificationClose = () => {
+    this.setState({ notificationOpen: false });
   };
 
   setVerse = e => {
@@ -40,9 +46,13 @@ export default class VerseDialog extends React.Component {
   };
 
   addVerse = () => {
-    const { passage, text} = this.state
-    axios.post(this.props.paths.cards, { passage: passage, text: text} )
-  }
+    const { passage, text } = this.state;
+    axios
+      .post(this.props.paths.cards, { passage: passage, text: text })
+      .then(() => {
+        this.setState({ notificationOpen: true, passage: "", text: "" });
+      });
+  };
 
   actionButton = () => {
     if (this.state.text) {
@@ -91,6 +101,7 @@ export default class VerseDialog extends React.Component {
                 id="name"
                 label="Verse"
                 type="text"
+                value={this.state.passage}
                 fullWidth
               />
               {text && (
@@ -108,6 +119,18 @@ export default class VerseDialog extends React.Component {
             </DialogActions>
           </form>
         </Dialog>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right"
+          }}
+          open={this.state.notificationOpen}
+          onClose={() => this.setState({ notificationOpen: false })}
+          ContentProps={{
+            "aria-describedby": "verse_added"
+          }}
+          message={<span id="verse_added">I love snacks</span>}
+        />
       </div>
     );
   }
