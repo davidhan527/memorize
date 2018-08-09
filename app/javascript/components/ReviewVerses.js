@@ -34,6 +34,28 @@ export default class ReviewVerses extends React.Component {
       });
   }
 
+  loopAudioWithPauseInterval() {
+    let verseAudio = new Audio(
+      "https://audio.esv.org/hw/43003016-43003018.mp3"
+    );
+    verseAudio.play();
+    verseAudio.onended = function() {
+      setTimeout(function() {
+        verseAudio.play();
+      }, 3000);
+    };
+  }
+
+  renderAudioWithControls() {
+    return (
+      <audio
+        src="https://audio.esv.org/hw/43003016-43003018.mp3"
+        controls
+        id="verse_audio"
+      />
+    );
+  }
+
   renderCard() {
     const { currentCard, cards } = this.state;
 
@@ -42,7 +64,6 @@ export default class ReviewVerses extends React.Component {
         <div>
           <h4>{currentCard.attributes.passage}</h4>
           <p>{currentCard.attributes.text}</p>
-
           <Button
             variant="outlined"
             component="span"
