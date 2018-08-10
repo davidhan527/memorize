@@ -11,7 +11,11 @@ class CardsController < ApplicationController
   end
 
   def create
-    Card.create(card_params)
+    Card.create(
+      # doing this is bc titleize removes hyphens.
+      passage: card_params[:passage].to_s.split('-').map(&:titleize).join('-'),
+      text: card_params[:text]
+    )
 
     render json: {}, status: :ok
   end
