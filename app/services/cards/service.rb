@@ -24,8 +24,8 @@ module Cards
 
       if difficulty == 'easy'
         @card.ranking += 1
-      elsif difficulty == 'hard'
-        @card.ranking -= 1 unless @card.ranking == 0
+      elsif difficulty == 'hard' && @card.ranking != 0
+        @card.ranking -= 1
       end
 
       @card.review_at = RANKING[@card.ranking]

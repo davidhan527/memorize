@@ -6,6 +6,7 @@ class CardsController < ApplicationController
       order(review_at: :desc).
       where('review_at <= ?', Time.current).
       all
+
     render json: { cards: CardSerializer.new(cards).serializable_hash }, status: :ok
   end
 
