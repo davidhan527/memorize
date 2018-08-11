@@ -93,11 +93,13 @@ export default class ReviewVerses extends React.Component {
   }
 }
 
-const Text = styled.p`
-  font-size: 1.1em;
-  line-height: 1.4;
-`
-
 const Passage = styled.h4`
+  font-family: "Roboto", sans-serif;
   font-size: 1.3em;
-`
+`;
+
+const Text = styled.p`
+  font-family: "EB Garamond", serif;
+  font-size: 1.2em;
+  line-height: 1.4;
+`;
