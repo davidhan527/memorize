@@ -62,7 +62,7 @@ export default class ReviewVerses extends React.Component {
     if (currentCard) {
       return (
         <div>
-          <h4>{currentCard.attributes.passage}</h4>
+          <Passage>{currentCard.attributes.passage}</Passage>
           <Text>{currentCard.attributes.text}</Text>
           <Button
             variant="outlined"
@@ -94,5 +94,10 @@ export default class ReviewVerses extends React.Component {
 }
 
 const Text = styled.p`
+  font-size: 1.1em;
   line-height: 1.4;
+`
+
+const Passage = styled.h4`
+  font-size: 1.3em;
 `
