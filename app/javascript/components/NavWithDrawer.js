@@ -24,7 +24,7 @@ const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   actions: {
     width: 350,
@@ -39,7 +39,7 @@ const styles = theme => ({
     overflow: "hidden",
     position: "relative",
     display: "flex",
-    width: "100%"
+    width: "100%",
   },
   appBar: {
     position: "absolute",
@@ -95,7 +95,8 @@ const styles = theme => ({
     })
   },
   "content-left": {
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
+    marginTop: "5em"
   },
   "content-right": {
     marginRight: -drawerWidth
