@@ -64,21 +64,27 @@ export default class ReviewVerses extends React.Component {
         <div>
           <Passage>{currentCard.attributes.passage}</Passage>
           <Text>{currentCard.attributes.text}</Text>
-          <Button
-            variant="outlined"
-            component="span"
-            onClick={() => this.reviewedCard("easy")}
-          >
-            Easy
-          </Button>
+          <Actions>
+            <Button
+              id="easy"
+              variant="outlined"
+              color="primary"
+              component="span"
+              onClick={() => this.reviewedCard("easy")}
+            >
+              Easy
+            </Button>
 
-          <Button
-            variant="outlined"
-            component="span"
-            onClick={() => this.reviewedCard("hard")}
-          >
-            Hard
-          </Button>
+            <Button
+              id="hard"
+              variant="outlined"
+              color="secondary"
+              component="span"
+              onClick={() => this.reviewedCard("hard")}
+            >
+              Hard
+            </Button>
+          </Actions>
         </div>
       );
     }
@@ -102,4 +108,15 @@ const Text = styled.p`
   font-family: "EB Garamond", serif;
   font-size: 1.2em;
   line-height: 1.4;
+`;
+
+const Actions = styled.div`
+  display: flex;
+  justify-content: center;
+  #easy {
+    margin-right: 1em;
+  }
+  #hard {
+    margin-left: 1em;
+  }
 `;
