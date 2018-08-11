@@ -1,6 +1,4 @@
-class CardsController < ApplicationController
-  protect_from_forgery with: :null_session
-
+class CardsController < ActionController::API
   def index
     cards = Card.
       order(review_at: :desc).
