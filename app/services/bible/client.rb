@@ -12,7 +12,15 @@ module Bible
         with_default_settings(req)
       end
 
-      Bible::Parser.new(response).call
+      Bible::Parser.new(response).parse_text
+    end
+
+    def get_audio
+      response = connection(BASE_URI + '/html/').get do |req|
+        req.params['q'] = @passage.to_s
+      end
+
+      Bible::Parser.new(response).parse_html
     end
 
     private
