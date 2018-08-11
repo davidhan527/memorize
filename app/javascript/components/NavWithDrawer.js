@@ -190,10 +190,10 @@ class NavWithDrawer extends React.Component {
             )}
           </IconButton>
         </div>
-        <Divider />
+        {/* <Divider />
         <List>{mailFolderListItems}</List>
         <Divider />
-        <List>{otherMailFolderListItems}</List>
+        <List>{otherMailFolderListItems}</List> */}
       </Drawer>
     );
 
