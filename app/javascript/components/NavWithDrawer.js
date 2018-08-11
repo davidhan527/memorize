@@ -138,8 +138,14 @@ class NavWithDrawer extends React.Component {
   renderMain() {
     const { classes, theme, paths } = this.props;
 
-    if (this.state.reviewingVerses) {
-      return <ReviewVerses paths={this.props.paths}/>
+    if (!this.props.signed_in) {
+      return (
+        <StyledTypography variant="display2">
+          <a href={paths.sign_in}>Sign In</a>
+        </StyledTypography>
+      );
+    } else if (this.state.reviewingVerses) {
+      return <ReviewVerses paths={this.props.paths} />;
     } else {
       return (
         <div className={classes.actions}>
