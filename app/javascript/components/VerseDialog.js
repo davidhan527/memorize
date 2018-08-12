@@ -92,7 +92,6 @@ export default class VerseDialog extends React.Component {
           <DialogTitle id="form-dialog-title">Add Verse</DialogTitle>
           <form onSubmit={this.searchVerse}>
             <StyledDialogContent>
-              <DialogContentText />
               <TextField
                 autoFocus
                 margin="dense"
@@ -105,9 +104,9 @@ export default class VerseDialog extends React.Component {
                 fullWidth
               />
               {text && (
-                <Typography variant="body1" gutterBottom>
+                <SearchedVerseText variant="body1" gutterBottom>
                   {text}
-                </Typography>
+                </SearchedVerseText>
               )}
             </StyledDialogContent>
             <DialogActions>
@@ -143,4 +142,14 @@ const StyledTypography = styled(Typography)`
 const StyledDialogContent = styled(DialogContent)`
   width: 500px;
   height: 300px;
+
+  &&& {
+    padding-top: 0px;
+  }
+`;
+
+const SearchedVerseText = styled(Typography)`
+  && {
+    margin-top: 1em;
+  }
 `;
