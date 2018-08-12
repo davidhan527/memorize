@@ -1,9 +1,9 @@
 class CardsController < ActionController::API
   def index
-    cards = Card.
+    cards = current_user.
+      cards.
       order(review_at: :desc).
-      where('review_at <= ?', Time.current).
-      all
+      where('review_at <= ?', Time.current)
 
     render json: { cards: CardSerializer.new(cards).serializable_hash }, status: :ok
   end
