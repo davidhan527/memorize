@@ -12,7 +12,8 @@ class CardsController < ActionController::API
     Card.create(
       # doing this is bc titleize removes hyphens.
       passage: card_params[:passage].to_s.split('-').map(&:titleize).join('-'),
-      text: card_params[:text]
+      text: card_params[:text],
+      user: current_user,
     )
 
     render json: {}, status: :ok
@@ -23,7 +24,7 @@ class CardsController < ActionController::API
 
   def reviewed
     Cards::Service.
-      new(Card.find(params[:id])).
+      new(current_user.cards.find(params[:id])).
       reviewed(params[:difficulty])
 
     render json: {}, status: :ok
