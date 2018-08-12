@@ -63,10 +63,14 @@ export default class ReviewVerses extends React.Component {
     if (currentCard) {
       return (
         <Card>
-          <PassageSection>
-            <Passage>{currentCard.attributes.passage}</Passage>
+          <VerseSection>
+            <PassageSection>
+              <Passage>{currentCard.attributes.passage}</Passage>
+              <StyledPlayArrowIcon />
+            </PassageSection>
+
             <Text>{currentCard.attributes.text}</Text>
-          </PassageSection>
+          </VerseSection>
 
           <Actions>
             <Button
@@ -104,6 +108,7 @@ export default class ReviewVerses extends React.Component {
 }
 
 const Passage = styled.h4`
+  display: inline-block;
   font-family: "Roboto", sans-serif;
   font-size: 1.3em;
 `;
@@ -129,7 +134,18 @@ const Actions = styled.div`
 
 const Card = styled.div``;
 
-const PassageSection = styled.div`
+const VerseSection = styled.div`
   margin: 0 auto;
   max-width: 85%;
+`;
+
+const StyledPlayArrowIcon = styled(PlayArrowIcon)`
+  && {
+    width: 1.6em;
+  }
+`;
+
+const PassageSection = styled.div`
+  display: flex;
+  align-items: center;
 `;
