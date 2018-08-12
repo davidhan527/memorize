@@ -3,9 +3,16 @@ import styled from "styled-components";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import PauseIcon from "@material-ui/icons/Pause";
 
 export default class ReviewVerses extends React.Component {
-  state = { cards: [], currentCard: null, audio: null, audioTimeoutId: null };
+  state = {
+    cards: [],
+    currentCard: null,
+    audio: null,
+    audioTimeoutId: null,
+    isCurrentlyPlaying: false
+  };
 
   componentDidMount() {
     axios.get(this.props.paths.cards).then(response => {
@@ -17,15 +24,6 @@ export default class ReviewVerses extends React.Component {
         });
       }
     });
-  }
-
-  stopAudio() {
-    const { audio } = this.state;
-    if (!audio) return;
-
-    this.state.audio.pause();
-    this.setState({ audio: null });
-    clearTimeout(this.state.audioTimeoutId);
   }
 
   reviewedCard(difficulty) {
@@ -46,23 +44,53 @@ export default class ReviewVerses extends React.Component {
       });
   }
 
+  pauseAudio = () => {
+    let { audio } = this.state;
+
+    audio.pause();
+    this.setState({ isCurrentlyPlaying: false });
+    clearTimeout(this.state.audioTimeoutId);
+  }
+
+  stopAudio() {
+    const { audio } = this.state;
+    if (!audio) return;
+
+    this.pauseAudio();
+    this.setState({ audio: null });
+  }
+
   loopAudioWithPauseInterval = () => {
     const { audio_url } = this.state.currentCard.attributes;
 
-    this.setState({ audio: new Audio(audio_url) }, () => {
-      let { audio } = this.state;
+    this.setState(
+      { audio: new Audio(audio_url), isCurrentlyPlaying: true },
+      () => {
+        let { audio } = this.state;
 
-      audio.play();
+        audio.play();
 
-      audio.onended = () => {
-        const timeoutId = setTimeout(function() {
-          audio.play();
-        }, 2000);
+        audio.onended = () => {
+          const timeoutId = setTimeout(function() {
+            audio.play();
+          }, 2000);
 
-        this.setState({ audioTimeoutId: timeoutId });
-      };
-    });
+          this.setState({ audioTimeoutId: timeoutId });
+        };
+      }
+    );
   };
+
+  renderAudioControls() {
+    const { audio_url } = this.state.currentCard.attributes;
+    if (!audio_url) return null;
+
+    if (this.state.isCurrentlyPlaying) {
+      return <StyledPauseIcon onClick={this.pauseAudio} />;
+    } else {
+      return <StyledPlayArrowIcon onClick={this.loopAudioWithPauseInterval} />;
+    }
+  }
 
   renderAudioWithControls() {
     return (
@@ -78,18 +106,12 @@ export default class ReviewVerses extends React.Component {
     const { currentCard, cards } = this.state;
 
     if (currentCard) {
-      const { audio_url } = this.state.currentCard.attributes;
-
       return (
         <Card>
           <VerseSection>
             <PassageSection>
               <Passage>{currentCard.attributes.passage}</Passage>
-              {audio_url && (
-                <StyledPlayArrowIcon
-                  onClick={this.loopAudioWithPauseInterval}
-                />
-              )}
+              {this.renderAudioControls()}
             </PassageSection>
 
             <Text>{currentCard.attributes.text}</Text>
@@ -163,6 +185,12 @@ const VerseSection = styled.div`
 `;
 
 const StyledPlayArrowIcon = styled(PlayArrowIcon)`
+  && {
+    width: 1.6em;
+  }
+`;
+
+const StyledPauseIcon = styled(PauseIcon)`
   && {
     width: 1.6em;
   }
