@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 
 export default class ReviewVerses extends React.Component {
-  state = { cards: [], currentCard: null };
+  state = { cards: [], currentCard: null, audio: null, audioTimeoutId: null };
 
   componentDidMount() {
     axios.get(this.props.paths.cards).then(response => {
@@ -17,6 +17,15 @@ export default class ReviewVerses extends React.Component {
         });
       }
     });
+  }
+
+  stopAudio() {
+    const { audio } = this.state;
+    if (!audio) return;
+
+    this.state.audio.pause();
+    this.setState({ audio: null });
+    clearTimeout(this.state.audioTimeoutId);
   }
 
   reviewedCard(difficulty) {
@@ -32,20 +41,28 @@ export default class ReviewVerses extends React.Component {
           cards: cardsCopy,
           currentCard: currentCard
         });
+
+        this.stopAudio();
       });
   }
 
-  loopAudioWithPauseInterval() {
-    let verseAudio = new Audio(
-      "https://audio.esv.org/hw/43003016-43003018.mp3"
-    );
-    verseAudio.play();
-    verseAudio.onended = function() {
-      setTimeout(function() {
-        verseAudio.play();
-      }, 3000);
-    };
-  }
+  loopAudioWithPauseInterval = () => {
+    const { audio_url } = this.state.currentCard.attributes;
+
+    this.setState({ audio: new Audio(audio_url) }, () => {
+      let { audio } = this.state;
+
+      audio.play();
+
+      audio.onended = () => {
+        const timeoutId = setTimeout(function() {
+          audio.play();
+        }, 2000);
+
+        this.setState({ audioTimeoutId: timeoutId });
+      };
+    });
+  };
 
   renderAudioWithControls() {
     return (
@@ -61,12 +78,18 @@ export default class ReviewVerses extends React.Component {
     const { currentCard, cards } = this.state;
 
     if (currentCard) {
+      const { audio_url } = this.state.currentCard.attributes;
+
       return (
         <Card>
           <VerseSection>
             <PassageSection>
               <Passage>{currentCard.attributes.passage}</Passage>
-              <StyledPlayArrowIcon />
+              {audio_url && (
+                <StyledPlayArrowIcon
+                  onClick={this.loopAudioWithPauseInterval}
+                />
+              )}
             </PassageSection>
 
             <Text>{currentCard.attributes.text}</Text>
