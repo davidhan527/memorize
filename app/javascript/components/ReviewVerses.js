@@ -61,9 +61,12 @@ export default class ReviewVerses extends React.Component {
 
     if (currentCard) {
       return (
-        <div>
-          <Passage>{currentCard.attributes.passage}</Passage>
-          <Text>{currentCard.attributes.text}</Text>
+        <Card>
+          <PassageSection>
+            <Passage>{currentCard.attributes.passage}</Passage>
+            <Text>{currentCard.attributes.text}</Text>
+          </PassageSection>
+
           <Actions>
             <Button
               id="easy"
@@ -85,7 +88,7 @@ export default class ReviewVerses extends React.Component {
               Hard
             </Button>
           </Actions>
-        </div>
+        </Card>
       );
     }
 
@@ -112,11 +115,20 @@ const Text = styled.p`
 
 const Actions = styled.div`
   display: flex;
+  margin-top: 1.5em;
   justify-content: center;
+
   #easy {
     margin-right: 1em;
   }
   #hard {
     margin-left: 1em;
   }
+`;
+
+const Card = styled.div``;
+
+const PassageSection = styled.div`
+  margin: 0 auto;
+  max-width: 85%;
 `;
