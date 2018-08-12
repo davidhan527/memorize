@@ -9,11 +9,15 @@ class CardsController < ActionController::API
   end
 
   def create
+    # doing this bc titleize removes hyphens
+    passage = card_params[:passage].to_s.split('-').map(&:titleize).join('-')
+    audio_url = Bible::Client.new(passage).get_audio_url
+
     Card.create(
-      # doing this is bc titleize removes hyphens.
-      passage: card_params[:passage].to_s.split('-').map(&:titleize).join('-'),
+      passage: passage,
       text: card_params[:text],
       user: current_user,
+      audio_url: audio_url,
     )
 
     render json: {}, status: :ok

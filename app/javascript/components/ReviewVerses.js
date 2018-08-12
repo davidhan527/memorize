@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 
 export default class ReviewVerses extends React.Component {
   state = { cards: [], currentCard: null };

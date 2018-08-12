@@ -15,12 +15,12 @@ module Bible
       Bible::Parser.new(response).parse_text
     end
 
-    def get_audio
+    def get_audio_url
       response = connection(BASE_URI + '/html/').get do |req|
         req.params['q'] = @passage.to_s
       end
 
-      Bible::Parser.new(response).parse_html
+      Bible::Parser.new(response).parse_audio_url
     end
 
     private

@@ -8,7 +8,7 @@ module Bible
       passage.to_s.squish
     end
 
-    def parse_html
+    def parse_audio_url
       html_passage = Nokogiri::HTML(passage)
       html_passage.at('a.mp3link')['href']
     end
