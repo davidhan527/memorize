@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import classNames from "classnames";
+import { injectGlobal } from "styled-components";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
+import Fade from "@material-ui/core/Fade";
 
 export default class ReviewVerses extends React.Component {
   state = {
@@ -11,22 +14,45 @@ export default class ReviewVerses extends React.Component {
     currentCard: null,
     audio: null,
     audioTimeoutId: null,
-    isCurrentlyPlaying: false
+    isCurrentlyPlaying: false,
+    showVerse: false
   };
 
   componentDidMount() {
+    document.getElementById("main_content").addEventListener("click", () => {
+      this.setState({ showVerse: true });
+    });
+
     axios.get(this.props.paths.cards).then(response => {
       if (response.data.cards.data) {
         const currentCard = response.data.cards.data.pop();
-        this.setState({
-          cards: response.data.cards.data,
-          currentCard: currentCard
-        });
+
+        this.setState(
+          {
+            cards: response.data.cards.data,
+            currentCard: currentCard
+          },
+          this.registerDifficultyButtonEvents
+        );
       }
     });
   }
 
+  registerDifficultyButtonEvents = () => {
+    document.getElementById("easy").addEventListener("click", e => {
+      e.stopPropagation();
+      this.reviewedCard("easy");
+    });
+
+    document.getElementById("hard").addEventListener("click", e => {
+      e.stopPropagation();
+      this.reviewedCard("hard");
+    });
+  };
+
   reviewedCard(difficulty) {
+    event.stopPropagation();
+
     axios
       .put(this.state.currentCard.attributes.reviewed_card_path, {
         difficulty: difficulty
@@ -37,7 +63,8 @@ export default class ReviewVerses extends React.Component {
 
         this.setState({
           cards: cardsCopy,
-          currentCard: currentCard
+          currentCard: currentCard,
+          showVerse: false
         });
 
         this.stopAudio();
@@ -50,7 +77,7 @@ export default class ReviewVerses extends React.Component {
     audio.pause();
     this.setState({ isCurrentlyPlaying: false });
     clearTimeout(this.state.audioTimeoutId);
-  }
+  };
 
   stopAudio() {
     const { audio } = this.state;
@@ -103,7 +130,7 @@ export default class ReviewVerses extends React.Component {
   }
 
   renderCard() {
-    const { currentCard, cards } = this.state;
+    const { currentCard, cards, showVerse } = this.state;
 
     if (currentCard) {
       return (
@@ -114,7 +141,9 @@ export default class ReviewVerses extends React.Component {
               {this.renderAudioControls()}
             </PassageSection>
 
-            <Text>{currentCard.attributes.text}</Text>
+            {showVerse && (
+              <Text className="fade-in">{currentCard.attributes.text}</Text>
+            )}
           </VerseSection>
 
           <Actions>
@@ -123,7 +152,7 @@ export default class ReviewVerses extends React.Component {
               variant="outlined"
               color="primary"
               component="span"
-              onClick={() => this.reviewedCard("easy")}
+              onClick={event => this.reviewedCard(event, "easy")}
             >
               Easy
             </Button>
@@ -133,7 +162,7 @@ export default class ReviewVerses extends React.Component {
               variant="outlined"
               color="secondary"
               component="span"
-              onClick={() => this.reviewedCard("hard")}
+              onClick={event => this.reviewedCard(event, "hard")}
             >
               Hard
             </Button>
@@ -199,4 +228,17 @@ const StyledPauseIcon = styled(PauseIcon)`
 const PassageSection = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  min-width: 15em;
+`;
+
+injectGlobal`
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .fade-in {
+    animation: fadeIn 1.5s;
+  }
 `;

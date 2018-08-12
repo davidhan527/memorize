@@ -223,7 +223,8 @@ class NavWithDrawer extends React.Component {
           </AppBar>
           {drawer}
           <main
-            className={classNames(classes.content, classes[`content-left`], {
+            id="main_content"
+            className={classNames(classes.content, classes[`content-left`], 'main-content', {
               [classes.contentShift]: open,
               [classes[`contentShift-left`]]: open
             })}
