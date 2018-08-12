@@ -96,7 +96,7 @@ const styles = theme => ({
   },
   "content-left": {
     marginLeft: -drawerWidth,
-    marginTop: "5em"
+    paddingTop: "5em"
   },
   "content-right": {
     marginRight: -drawerWidth
