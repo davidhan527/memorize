@@ -188,7 +188,7 @@ const Passage = styled.h4`
 
 const Text = styled.p`
   font-family: "EB Garamond", serif;
-  font-size: 1.2em;
+  font-size: 1.3em;
   line-height: 1.4;
 `;
 
