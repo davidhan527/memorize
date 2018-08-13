@@ -171,12 +171,12 @@ export default class ReviewVerses extends React.Component {
     }
 
     if (currentCard !== null && cards.length === 0) {
-      return <div>You have no more verses to review.</div>;
+      return <div>All verses reviewed!</div>;
     }
   }
 
   render() {
-    return <div>{this.renderCard()}</div>;
+    return <CompleteText>{this.renderCard()}</CompleteText>;
   }
 }
 
@@ -190,6 +190,11 @@ const Text = styled.p`
   font-family: "EB Garamond", serif;
   font-size: 1.3em;
   line-height: 1.4;
+`;
+
+const CompleteText = styled.div`
+  font-family: "Roboto", sans-serif;
+  font-size: 1.3em;
 `;
 
 const Actions = styled.div`
