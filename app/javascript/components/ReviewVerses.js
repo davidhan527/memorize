@@ -184,6 +184,7 @@ const Passage = styled.h4`
   display: inline-block;
   font-family: "Roboto", sans-serif;
   font-size: 1.3em;
+  white-space: nowrap;
 `;
 
 const Text = styled.p`
@@ -214,7 +215,20 @@ const Card = styled.div``;
 
 const VerseSection = styled.div`
   margin: 0 auto;
-  max-width: 85%;
+
+  @media (min-width: 600px) {
+    max-width: 90%;
+  }
+
+  @media (min-width: 900px) {
+    max-width: 60%;
+  }
+`;
+
+const PassageSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const StyledPlayArrowIcon = styled(PlayArrowIcon)`
@@ -227,13 +241,6 @@ const StyledPauseIcon = styled(PauseIcon)`
   && {
     width: 1.6em;
   }
-`;
-
-const PassageSection = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 15em;
 `;
 
 injectGlobal`
