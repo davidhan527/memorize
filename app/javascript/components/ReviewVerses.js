@@ -6,7 +6,6 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
-import Fade from "@material-ui/core/Fade";
 
 export default class ReviewVerses extends React.Component {
   state = {
@@ -100,7 +99,7 @@ export default class ReviewVerses extends React.Component {
         audio.onended = () => {
           const timeoutId = setTimeout(function() {
             audio.play();
-          }, 2000);
+          }, 3000);
 
           this.setState({ audioTimeoutId: timeoutId });
         };
