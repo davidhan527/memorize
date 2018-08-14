@@ -261,7 +261,7 @@ injectGlobal`
   }
 
   .fade-in.show {
-    transition: max-height 2s ease-in-out;
+    transition: max-height 2.5s ease-in;
     max-height: 1000px;
   }
 `;
