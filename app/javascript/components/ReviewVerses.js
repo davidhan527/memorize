@@ -6,6 +6,7 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
+import Slide from "@material-ui/core/Slide";
 
 export default class ReviewVerses extends React.Component {
   state = {
@@ -140,9 +141,9 @@ export default class ReviewVerses extends React.Component {
               {this.renderAudioControls()}
             </PassageSection>
 
-            {showVerse && (
-              <Text className="fade-in">{currentCard.attributes.text}</Text>
-            )}
+            <Text className={classNames("fade-in", { show: showVerse })}>
+              {currentCard.attributes.text}
+            </Text>
           </VerseSection>
 
           <Actions>
@@ -180,17 +181,28 @@ export default class ReviewVerses extends React.Component {
   }
 }
 
+const PassageSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+`;
+
 const Passage = styled.h4`
   display: inline-block;
   font-family: "Roboto", sans-serif;
   font-size: 1.3em;
   white-space: nowrap;
+  margin-top: 0;
+  margin-bottom: 0;
 `;
 
 const Text = styled.p`
   font-family: "EB Garamond", serif;
   font-size: 1.3em;
   line-height: 1.4;
+
+  margin-top: 10px;
 `;
 
 const CompleteText = styled.div`
@@ -204,10 +216,10 @@ const Actions = styled.div`
   justify-content: center;
 
   #easy {
-    margin-right: 1em;
+    margin-right: 1.2em;
   }
   #hard {
-    margin-left: 1em;
+    margin-left: 1.2em;
   }
 `;
 
@@ -223,12 +235,6 @@ const VerseSection = styled.div`
   @media (min-width: 900px) {
     max-width: 60%;
   }
-`;
-
-const PassageSection = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const StyledPlayArrowIcon = styled(PlayArrowIcon)`
@@ -250,6 +256,12 @@ injectGlobal`
   }
 
   .fade-in {
-    animation: fadeIn 1.5s;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .fade-in.show {
+    transition: max-height 2s ease-in-out;
+    max-height: 1000px;
   }
 `;
