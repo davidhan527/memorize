@@ -38,7 +38,7 @@ module Bible
     end
 
     def connection(url)
-      @connection ||= Faraday.new(url: url) do |conn|
+      @connection = Faraday.new(url: url) do |conn|
         conn.headers['Authorization'] = "Token #{Rails.application.secrets.esv_api}"
         conn.adapter(Faraday.default_adapter)
       end

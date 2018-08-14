@@ -32,5 +32,12 @@ module Cards
       @card.save!
       @card
     end
+
+    def refresh_text_and_audio
+      client = Bible::Client.new(@card.passage)
+      @card.text = client.get
+      @card.audio_url = client.get_audio_url
+      @card.save!
+    end
   end
 end
