@@ -100,7 +100,7 @@ export default class ReviewVerses extends React.Component {
         audio.onended = () => {
           const timeoutId = setTimeout(function() {
             audio.play();
-          }, 3000);
+          }, 7000);
 
           this.setState({ audioTimeoutId: timeoutId });
         };
