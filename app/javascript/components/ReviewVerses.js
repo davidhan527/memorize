@@ -227,6 +227,7 @@ const Card = styled.div``;
 
 const VerseSection = styled.div`
   margin: 0 auto;
+  margin-top: 2em;
 
   @media (min-width: 600px) {
     max-width: 90%;
@@ -262,6 +263,6 @@ injectGlobal`
 
   .fade-in.show {
     transition: max-height 2s ease-in;
-    max-height: 1000px;
+    max-height: 7000px;
   }
 `;
