@@ -20,7 +20,7 @@ export default class ReviewVerses extends React.Component {
 
   componentDidMount() {
     document.getElementById("main_content").addEventListener("click", () => {
-      this.setState({ showVerse: true });
+      this.setState({ showVerse: !this.state.showVerse });
     });
 
     axios.get(this.props.paths.cards).then(response => {
