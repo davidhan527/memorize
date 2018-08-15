@@ -4,8 +4,8 @@ import classNames from "classnames";
 import { injectGlobal } from "styled-components";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import PauseIcon from "@material-ui/icons/Pause";
+import PlayArrowIcon from "@material-ui/icons/PlayCircleOutline";
+import PauseIcon from "@material-ui/icons/PauseCircleOutline";
 import Slide from "@material-ui/core/Slide";
 
 export default class ReviewVerses extends React.Component {
@@ -240,13 +240,19 @@ const VerseSection = styled.div`
 
 const StyledPlayArrowIcon = styled(PlayArrowIcon)`
   && {
-    width: 1.6em;
+    width: 1.4em;
+    height: 1.4em;
+    margin-left: 0.4em;
+    fill: #666666;
   }
 `;
 
 const StyledPauseIcon = styled(PauseIcon)`
   && {
-    width: 1.6em;
+    width: 1.4em;
+    height: 1.4em;
+    margin-left: 0.4em;
+    fill: #666666;
   }
 `;
 
