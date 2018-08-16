@@ -19,38 +19,28 @@ export default class ReviewVerses extends React.Component {
   };
 
   componentDidMount() {
-    document.getElementById("main_content").addEventListener("click", () => {
-      this.setState({ showVerse: !this.state.showVerse });
-    });
-
     axios.get(this.props.paths.cards).then(response => {
       if (response.data.cards.data) {
         const currentCard = response.data.cards.data.pop();
 
-        this.setState(
-          {
-            cards: response.data.cards.data,
-            currentCard: currentCard
-          },
-          this.registerDifficultyButtonEvents
-        );
+        this.setState({
+          cards: response.data.cards.data,
+          currentCard: currentCard
+        });
       }
     });
   }
 
-  registerDifficultyButtonEvents = () => {
-    document.getElementById("easy").addEventListener("click", e => {
-      e.stopPropagation();
-      this.reviewedCard("easy");
-    });
-
-    document.getElementById("hard").addEventListener("click", e => {
-      e.stopPropagation();
-      this.reviewedCard("hard");
-    });
+  showOrHideVerse = () => {
+    this.setState({ showVerse: !this.state.showVerse });
   };
 
-  reviewedCard(difficulty) {
+  playAudio = e => {
+    e.stopPropagation();
+    this.loopAudioWithPauseInterval();
+  };
+
+  reviewedCard(event, difficulty) {
     event.stopPropagation();
 
     axios
@@ -71,7 +61,11 @@ export default class ReviewVerses extends React.Component {
       });
   }
 
-  pauseAudio = () => {
+  pauseAudio = e => {
+    if (e) {
+      e.stopPropagation();
+    }
+
     let { audio } = this.state;
 
     audio.pause();
@@ -115,7 +109,7 @@ export default class ReviewVerses extends React.Component {
     if (this.state.isCurrentlyPlaying) {
       return <StyledPauseIcon onClick={this.pauseAudio} />;
     } else {
-      return <StyledPlayArrowIcon onClick={this.loopAudioWithPauseInterval} />;
+      return <StyledPlayArrowIcon onClick={this.playAudio} />;
     }
   }
 
@@ -134,7 +128,7 @@ export default class ReviewVerses extends React.Component {
 
     if (currentCard) {
       return (
-        <Card>
+        <Card onClick={this.showOrHideVerse}>
           <VerseSection>
             <PassageSection>
               <Passage>{currentCard.attributes.passage}</Passage>
@@ -223,7 +217,9 @@ const Actions = styled.div`
   }
 `;
 
-const Card = styled.div``;
+const Card = styled.div`
+  min-height: 400px;
+`;
 
 const VerseSection = styled.div`
   margin: 0 auto;
