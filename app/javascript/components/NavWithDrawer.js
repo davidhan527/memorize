@@ -24,7 +24,7 @@ const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   actions: {
     width: 350,
@@ -39,7 +39,7 @@ const styles = theme => ({
     overflow: "hidden",
     position: "relative",
     display: "flex",
-    width: "100%",
+    width: "100%"
   },
   appBar: {
     position: "absolute",
@@ -84,9 +84,6 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
     transition: theme.transitions.create("margin", {
@@ -222,17 +219,23 @@ class NavWithDrawer extends React.Component {
             </Toolbar>
           </AppBar>
           {drawer}
-          <main
+          <Main
             id="main_content"
-            className={classNames(classes.content, classes[`content-left`], 'main-content', {
-              [classes.contentShift]: open,
-              [classes[`contentShift-left`]]: open
-            })}
+            className={classNames(
+              classes.content,
+              classes[`content-left`],
+              "main-content",
+              {
+                [classes.contentShift]: open,
+                [classes[`contentShift-left`]]: open
+              },
+              { "verse-review": this.state.reviewingVerses }
+            )}
           >
             <div className={classes.drawerHeader} />
 
             {this.renderMain()}
-          </main>
+          </Main>
         </div>
       </div>
     );
@@ -243,6 +246,17 @@ NavWithDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired
 };
+
+const Main = styled.main`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.verse-review {
+    align-items: flex-start;
+    margin-top: 2.6em;
+  }
+`;
 
 export default withStyles(styles, { withTheme: true })(NavWithDrawer);
 

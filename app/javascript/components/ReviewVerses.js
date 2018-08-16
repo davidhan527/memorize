@@ -177,7 +177,7 @@ export default class ReviewVerses extends React.Component {
 
 const PassageSection = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin-bottom: 1em;
 `;
@@ -223,7 +223,6 @@ const Card = styled.div`
 
 const VerseSection = styled.div`
   margin: 0 auto;
-  margin-top: 2em;
 
   @media (min-width: 600px) {
     max-width: 90%;
