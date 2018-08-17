@@ -10,8 +10,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
 import Snackbar from "@material-ui/core/Snackbar";
 import axios from "axios";
+import withMobileDialog from "@material-ui/core/withMobileDialog";
 
-export default class VerseDialog extends React.Component {
+class VerseDialog extends React.Component {
   state = {
     open: false,
     passage: "",
@@ -72,6 +73,7 @@ export default class VerseDialog extends React.Component {
 
   render() {
     const { text, passage } = this.state;
+    const { fullScreen } = this.props;
 
     return (
       <div>
@@ -84,6 +86,7 @@ export default class VerseDialog extends React.Component {
         </StyledTypography>
 
         <Dialog
+          fullScreen={fullScreen}
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
@@ -140,8 +143,16 @@ const StyledTypography = styled(Typography)`
 `;
 
 const StyledDialogContent = styled(DialogContent)`
-  width: 500px;
-  height: 300px;
+  @media (min-width: 600px) {
+    max-width: 100%;
+  }
+
+  @media (min-width: 900px) {
+    min-width: 600px;
+  }
+
+  min-height: 400px;
+  max-height: 600px;
 
   &&& {
     padding-top: 0px;
@@ -153,3 +164,5 @@ const SearchedVerseText = styled(Typography)`
     margin-top: 1em;
   }
 `;
+
+export default withMobileDialog()(VerseDialog);

@@ -218,7 +218,7 @@ const Actions = styled.div`
 `;
 
 const Card = styled.div`
-  min-height: 400px;
+  min-height: 600px;
 `;
 
 const VerseSection = styled.div`
