@@ -31,7 +31,8 @@ const styles = theme => ({
     height: 200
   },
   actionText: {
-    textAlign: "center"
+    textAlign: "center",
+    marginTop: "2em"
   },
   appFrame: {
     height: "100%",
