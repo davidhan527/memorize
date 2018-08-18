@@ -1,22 +1,5 @@
 module Cards
   class Service
-    RANKING = {
-      0 => Time.current,
-      1 => 15.minutes.from_now,
-      2 => 1.hour.from_now,
-      3 => 1.day.from_now,
-      4 => 3.days.from_now,
-      5 => 1.week.from_now,
-      6 => 2.weeks.from_now,
-      7 => 1.month.from_now,
-      8 => 6.weeks.from_now,
-      9 => 3.months.from_now,
-      10 => 14.weeks.from_now,
-      11 => 6.months.from_now,
-      12 => 9.months.from_now,
-      13 => 1.year.from_now,
-    }.freeze
-
     def initialize(card)
       @card = card
     end
@@ -30,7 +13,7 @@ module Cards
         @card.ranking -= 1
       end
 
-      @card.review_at = RANKING[@card.ranking]
+      @card.review_at = CardRanking::RANKING[@card.ranking][:value]
       @card.save!
       @card
     end

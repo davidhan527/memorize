@@ -5,4 +5,8 @@ class CardSerializer
   attribute :reviewed_card_path do |card|
     Rails.application.routes.url_helpers.reviewed_card_path(card)
   end
+
+  attribute :rankings_in_words do |card|
+    CardRanking.new(card).rankings_in_words
+  end
 end
