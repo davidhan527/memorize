@@ -6,6 +6,7 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import PlayArrowIcon from "@material-ui/icons/PlayCircleOutline";
 import PauseIcon from "@material-ui/icons/PauseCircleOutline";
+import MoreIcon from "@material-ui/icons/MoreVert";
 import Slide from "@material-ui/core/Slide";
 
 export default class ReviewVerses extends React.Component {
@@ -160,6 +161,7 @@ export default class ReviewVerses extends React.Component {
             >
               Hard
             </Button>
+            <MoreIcon />
           </Actions>
         </Card>
       );
@@ -208,6 +210,7 @@ const Actions = styled.div`
   display: flex;
   margin-top: 1.5em;
   justify-content: center;
+  align-items: center;
 
   #easy {
     margin-right: 1.2em;
