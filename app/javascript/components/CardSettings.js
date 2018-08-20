@@ -3,6 +3,10 @@ import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import Popover from "@material-ui/core/Popover";
 import InfoIcon from "@material-ui/icons/InfoOutline";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListSubheader from "@material-ui/core/ListSubheader";
 
 export default class CardSettings extends React.Component {
   state = {
@@ -47,12 +51,24 @@ export default class CardSettings extends React.Component {
           }}
         >
           <PopoverContent>
-            <Typography>When will I see this verse again:</Typography>
-            <ul>
-              <li>Easy - {rankings.easy} </li>
-              <li>Okay - {rankings.okay} </li>
-              <li>Hard - {rankings.hard} </li>
-            </ul>
+            <List
+              dense={true}
+              subheader={
+                <Typography variant="body2" gutterBottom>
+                  When will I see this verse again:
+                </Typography>
+              }
+            >
+              <StyledListedItem>
+                <ListItemText primary={`Easy - ${rankings.easy}`} />
+              </StyledListedItem>
+              <StyledListedItem>
+                <ListItemText primary={`Okay - ${rankings.okay}`} />
+              </StyledListedItem>
+              <StyledListedItem>
+                <ListItemText primary={`Hard - ${rankings.hard}`} />
+              </StyledListedItem>
+            </List>
           </PopoverContent>
         </Popover>
       </div>
@@ -68,4 +84,10 @@ const StyledInfoIcon = styled(InfoIcon)`
 
 const PopoverContent = styled.div`
   padding: 1em;
+`;
+
+const StyledListedItem = styled(ListItem)`
+  && {
+    padding-left: 0;
+  }
 `;
