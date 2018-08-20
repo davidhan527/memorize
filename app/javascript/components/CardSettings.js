@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
 import InfoIcon from "@material-ui/icons/InfoOutline";
 
@@ -20,7 +17,9 @@ export default class CardSettings extends React.Component {
     });
   };
 
-  handleClose = () => {
+  handleClose = event => {
+    event.stopPropagation();
+
     this.setState({
       anchorEl: null
     });
@@ -48,14 +47,12 @@ export default class CardSettings extends React.Component {
           }}
         >
           <PopoverContent>
-            <Typography>
-              When will I see this verse again:
-              <ul>
-                <li>Easy - {rankings.easy} </li>
-                <li>Okay - {rankings.okay} </li>
-                <li>Hard - {rankings.hard} </li>
-              </ul>
-            </Typography>
+            <Typography>When will I see this verse again:</Typography>
+            <ul>
+              <li>Easy - {rankings.easy} </li>
+              <li>Okay - {rankings.okay} </li>
+              <li>Hard - {rankings.hard} </li>
+            </ul>
           </PopoverContent>
         </Popover>
       </div>
@@ -65,7 +62,7 @@ export default class CardSettings extends React.Component {
 
 const StyledInfoIcon = styled(InfoIcon)`
   && {
-    fill: #2979ff;
+    fill: #1c54b2;
   }
 `;
 
