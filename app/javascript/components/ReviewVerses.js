@@ -6,8 +6,9 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import PlayArrowIcon from "@material-ui/icons/PlayCircleOutline";
 import PauseIcon from "@material-ui/icons/PauseCircleOutline";
-import MoreIcon from "@material-ui/icons/MoreVert";
+import InfoIcon from "@material-ui/icons/InfoOutline";
 import Slide from "@material-ui/core/Slide";
+import CardSettings from "./CardSettings";
 
 export default class ReviewVerses extends React.Component {
   state = {
@@ -161,7 +162,7 @@ export default class ReviewVerses extends React.Component {
             >
               Hard
             </Button>
-            <MoreIcon />
+            <CardSettings/>
           </Actions>
         </Card>
       );
