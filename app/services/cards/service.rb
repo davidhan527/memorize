@@ -5,6 +5,8 @@ module Cards
     end
 
     def reviewed(difficulty)
+      raise 'unknown difficulty' if !['easy', 'okay', 'hard'].include?(difficulty)
+
       @card.last_viewed_at = Time.current
 
       if difficulty == 'easy'

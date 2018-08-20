@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -6,13 +7,7 @@ import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
 import InfoIcon from "@material-ui/icons/InfoOutline";
 
-const styles = theme => ({
-  typography: {
-    margin: theme.spacing.unit * 2
-  }
-});
-
-class CardSettings extends React.Component {
+export default class CardSettings extends React.Component {
   state = {
     anchorEl: null
   };
@@ -32,15 +27,14 @@ class CardSettings extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { rankings } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
     return (
       <div>
-        <InfoIcon onClick={this.showCardSettings} />
+        <StyledInfoIcon onClick={this.showCardSettings} />
         <Popover
-          id="simple-popper"
           open={open}
           anchorEl={anchorEl}
           onClose={this.handleClose}
@@ -53,17 +47,28 @@ class CardSettings extends React.Component {
             horizontal: "center"
           }}
         >
-          <Typography className={classes.typography}>
-            The content of the Popover.
-          </Typography>
+          <PopoverContent>
+            <Typography>
+              When will I see this verse again:
+              <ul>
+                <li>Easy - {rankings.easy} </li>
+                <li>Okay - {rankings.okay} </li>
+                <li>Hard - {rankings.hard} </li>
+              </ul>
+            </Typography>
+          </PopoverContent>
         </Popover>
       </div>
     );
   }
 }
 
-CardSettings.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+const StyledInfoIcon = styled(InfoIcon)`
+  && {
+    fill: #2979ff;
+  }
+`;
 
-export default withStyles(styles)(CardSettings);
+const PopoverContent = styled.div`
+  padding: 1em;
+`;

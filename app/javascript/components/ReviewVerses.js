@@ -145,6 +145,7 @@ export default class ReviewVerses extends React.Component {
           <Actions>
             <Button
               id="easy"
+              className="difficulty"
               variant="outlined"
               color="primary"
               component="span"
@@ -154,7 +155,17 @@ export default class ReviewVerses extends React.Component {
             </Button>
 
             <Button
+              id="okay"
+              className="difficulty"
+              variant="outlined"
+              component="span"
+              onClick={event => this.reviewedCard(event, "okay")}
+            >
+              Okay
+            </Button>
+            <Button
               id="hard"
+              className="difficulty"
               variant="outlined"
               color="secondary"
               component="span"
@@ -162,7 +173,7 @@ export default class ReviewVerses extends React.Component {
             >
               Hard
             </Button>
-            <CardSettings/>
+            <CardSettings rankings={currentCard.attributes.ranking_in_words} />
           </Actions>
         </Card>
       );
@@ -213,11 +224,8 @@ const Actions = styled.div`
   justify-content: center;
   align-items: center;
 
-  #easy {
+  .difficulty {
     margin-right: 1.2em;
-  }
-  #hard {
-    margin-left: 1.2em;
   }
 `;
 
