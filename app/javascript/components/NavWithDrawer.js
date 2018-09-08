@@ -250,6 +250,7 @@ NavWithDrawer.propTypes = {
 
 const Main = styled.main`
   display: flex;
+  min-height: calc(100vh - 64px);
   align-items: center;
   justify-content: center;
 
