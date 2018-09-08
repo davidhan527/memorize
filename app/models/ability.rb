@@ -15,9 +15,9 @@ class Ability
     # can :read, :all
     if user.present?  # additional permissions for logged in users (they can manage their posts)
       can :manage, Card, user_id: user.id
+      can :manage, :all if user.email == 'davidhan527@gmail.com'
     end
 
-    can :manage, :all
     # can :manage, Card, user_id: user.id
     #
     # The first argument to `can` is the action you are giving the user
