@@ -42,6 +42,8 @@ gem 'fast_jsonapi'
 gem 'mechanize'
 gem 'faraday'
 gem 'devise'
+gem 'rails_admin'
+gem 'cancancan'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
