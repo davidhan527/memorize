@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import Popover from "@material-ui/core/Popover";
-import InfoIcon from "@material-ui/icons/InfoOutline";
+import InfoIcon from "@material-ui/icons/InfoOutlined";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";

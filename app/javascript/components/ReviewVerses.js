@@ -6,7 +6,6 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import PlayArrowIcon from "@material-ui/icons/PlayCircleOutline";
 import PauseIcon from "@material-ui/icons/PauseCircleOutline";
-import InfoIcon from "@material-ui/icons/InfoOutline";
 import Slide from "@material-ui/core/Slide";
 import CardSettings from "./CardSettings";
 
