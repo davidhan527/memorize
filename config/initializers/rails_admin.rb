@@ -13,6 +13,26 @@ RailsAdmin.config do |config|
 
   config.parent_controller = 'ApplicationController'
 
+  config.model Card do
+    list do
+      field :passage
+      field :text
+      field :last_viewed_at
+      field :review_at
+    end
+
+    edit do
+      field :passage
+      field :text
+
+      field :user_id, :hidden do
+        default_value do
+          bindings[:view]._current_user.id
+        end
+      end
+    end
+  end
+
   ## == Pundit ==
   # config.authorize_with :pundit
 

@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :cards
+
+  def admin?
+    email == 'davidhan527@gmail.com'
+  end
 end
