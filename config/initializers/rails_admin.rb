@@ -31,6 +31,13 @@ RailsAdmin.config do |config|
         end
       end
     end
+
+    export do
+      field :passage
+      field :text
+      field :last_viewed_at
+      field :review_at
+    end
   end
 
   ## == Pundit ==
